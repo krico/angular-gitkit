@@ -1,6 +1,6 @@
 {
   "name": "angular-gitkit",
-  "version": "0.0.2-0",
+  "version": "0.0.0",
   "description": "An AngularJS module to integrate with Google Identity Toolkit (GITkit)",
   "homepage": "https://github.com/krico/angular-gitkit",
   "main": "./dist/angular-gitkit.js",
