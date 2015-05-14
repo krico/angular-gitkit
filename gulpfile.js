@@ -36,7 +36,7 @@ var paths = {
 
 gulp.task('default', ['build']);
 
-gulp.task('build', ['clean', 'jscs', 'lint'], function () {
+gulp.task('build', ['clean', 'lint'], function () {
     return gulp.src(paths.src)
         .pipe(concat(paths['dist-name']))
         .pipe(header(banner, {pkg: pkg}))
@@ -73,23 +73,16 @@ gulp.task('dist', ['dist-clean', 'build', 'test'], function () {
         .pipe(gulp.dest(paths.dist));
 });
 
-gulp.task('jscs', function () {
-    gulp.src(paths.src)
-        //.pipe(plumber())
-        .pipe(jscs())
-        .on('error', notify.onError({message: 'JSCS fail'}))
-        .pipe(stylish());
-});
-
 gulp.task('lint', function () {
     gulp.src(paths.src)
-        .pipe(plumber())
+        //.pipe(plumber())
         .pipe(jshint('.jshintrc'))
-        .pipe(jshint.reporter('jshint-stylish'))
-        .pipe(jshint.reporter('fail'))
-        .on('error', notify.onError({message: 'LINT fail'}));
+        .pipe(jscs())
+        .on('error', notify.onError({title: 'LINT fail', message: 'lint fail'}))
+        .pipe(stylish.combineWithHintResults())
+        .pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('watch-lint', ['build'], function () {
-    gulp.watch([paths.src], ['lint', 'jscs']);
+    gulp.watch([paths.src], ['lint']);
 });
