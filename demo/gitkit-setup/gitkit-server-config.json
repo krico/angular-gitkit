@@ -1,0 +1,7 @@
+{
+  "clientId" : "1090427153719-7c5mp1d81o95q2jjgcl5f8r5goie1hth.apps.googleusercontent.com",
+  "serviceAccountEmail" : "1090427153719-5t6kordu6jigk2efaql4mmvotomoar0e@developer.gserviceaccount.com",
+  "serviceAccountPrivateKeyFile" : "INSERT/PATH/TO/PRIVATEKEY",
+  "widgetUrl" : "https://localhost/oauth2/redirect",
+  "cookieName" : "gtoken"
+}
