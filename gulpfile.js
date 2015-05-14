@@ -8,6 +8,11 @@ var path = require('path');
 var jasmine = require('gulp-jasmine');
 var ngAnnotate = require('gulp-ng-annotate');
 var header = require('gulp-header');
+var jshint = require('gulp-jshint');
+var jscs = require('gulp-jscs');
+var notify = require('gulp-notify');
+var plumber = require('gulp-plumber');
+var stylish = require('gulp-jscs-stylish');
 
 var banner = ['/**',
     ' * <%= pkg.name %> - <%= pkg.description %>',
@@ -31,7 +36,7 @@ var paths = {
 
 gulp.task('default', ['build']);
 
-gulp.task('build', ['clean'], function () {
+gulp.task('build', ['clean', 'jscs', 'lint'], function () {
     return gulp.src(paths.src)
         .pipe(concat(paths['dist-name']))
         .pipe(header(banner, {pkg: pkg}))
@@ -39,7 +44,11 @@ gulp.task('build', ['clean'], function () {
         .pipe(ngAnnotate())
         .pipe(uglify({preserveComments: 'some'}))
         .pipe(rename({extname: '.min.js'}))
-        .pipe(gulp.dest(paths.build));
+        .pipe(gulp.dest(paths.build))
+        .pipe(notify({
+            title: 'Task Builder',
+            message: 'Successfully built application'
+        }));
 });
 
 gulp.task('clean', function (cb) {
@@ -64,3 +73,23 @@ gulp.task('dist', ['dist-clean', 'build', 'test'], function () {
         .pipe(gulp.dest(paths.dist));
 });
 
+gulp.task('jscs', function () {
+    gulp.src(paths.src)
+        //.pipe(plumber())
+        .pipe(jscs())
+        .on('error', notify.onError({message: 'JSCS fail'}))
+        .pipe(stylish());
+});
+
+gulp.task('lint', function () {
+    gulp.src(paths.src)
+        .pipe(plumber())
+        .pipe(jshint('.jshintrc'))
+        .pipe(jshint.reporter('jshint-stylish'))
+        .pipe(jshint.reporter('fail'))
+        .on('error', notify.onError({message: 'LINT fail'}));
+});
+
+gulp.task('watch-lint', ['build'], function () {
+    gulp.watch([paths.src], ['lint', 'jscs']);
+});

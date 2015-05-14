@@ -3,11 +3,10 @@
     angular.module('ngGITkit').provider('GITKit', GITKitProvider);
 
     function GITKitProvider() {
-        this.$get = GITKit;
-
-        function GITKit($window) {
+        this.$get = GITKitService;
+        function GITKitService($window) {
             var GITKit = {};
-
+            GITKit.yes = true;
             return GITKit;
         }
     }
