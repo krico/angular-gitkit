@@ -1,0 +1,40 @@
+{
+  "name": "angular-gitkit",
+  "version": "0.0.1",
+  "description": "An AngularJS module to integrate with Google Identity Toolkit (GITkit)",
+  "homepage": "https://github.com/krico/angular-gitkit",
+  "main": "./dist/angular-gitkit.js",
+  "scripts": {
+    "pretest": "npm install",
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krico/angular-gitkit.git"
+  },
+  "keywords": [
+    "AngularJS",
+    "GitKit",
+    "Google",
+    "Identity",
+    "Toolkit",
+    "OpenID",
+    "OpenID Foundation"
+  ],
+  "author": "krico <github@cwa.to>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/krico/angular-gitkit/issues"
+  },
+  "devDependencies": {
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-concat": "^2.5.2",
+    "gulp-header": "^1.2.2",
+    "gulp-jasmine": "^2.0.1",
+    "gulp-ng-annotate": "^0.5.3",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.4"
+  }
+}

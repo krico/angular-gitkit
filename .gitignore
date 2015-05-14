@@ -1,2 +1,4 @@
 .idea
-angular-git-kit.iml
+angular-gitkit.iml
+node_modules
+build
