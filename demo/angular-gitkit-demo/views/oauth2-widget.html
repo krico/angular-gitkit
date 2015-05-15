@@ -1,0 +1,24 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script type="text/javascript" src="//www.gstatic.com/authtoolkit/js/gitkit.js"></script>
+    <link type=text/css rel=stylesheet href="//www.gstatic.com/authtoolkit/css/gitkit.css"/>
+    <script type="text/javascript">
+        var config = {
+            apiKey: 'AIzaSyCuRw3NzQcX7au6vRVAjpLj--V9vzO68uE',
+            signInSuccessUrl: '/oauth2/sign-in',
+            idps: ["google"],
+            oobActionUrl: '/oauth2/email',
+            siteName: 'angular-gitkit-demo'
+        };
+        window.google.identitytoolkit.start(
+                '#gitkitWidgetDiv',
+                config,
+                'JAVASCRIPT_ESCAPED_POST_BODY');
+    </script>
+</head>
+<body>
+<div id="gitkitWidgetDiv"></div>
+</body>
+</html>

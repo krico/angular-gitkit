@@ -1,0 +1,22 @@
+<html>
+<head>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
+    <title>angular-gitkit-demo - welcome</title>
+    <script type="text/javascript" src="//www.gstatic.com/authtoolkit/js/gitkit.js"></script>
+    <link type=text/css rel=stylesheet href="//www.gstatic.com/authtoolkit/css/gitkit.css"/>
+    <script type=text/javascript>
+        window.google.identitytoolkit.signInButton(
+                '#signIn-static',
+                {
+                    widgetUrl: "/oauth2/redirect",
+                    signOutUrl: "/oauth2/sign-out"
+                }
+        );
+    </script>
+</head>
+<body>
+<h1>angular-gitkit-demo</h1>
+
+<div id="signIn-static"></div>
+</body>
+</html>
