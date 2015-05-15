@@ -1,3 +1,4 @@
+var fs = require('fs');
 var express = require('express');
 var expressPlates = require('express-plates');
 var path = require('path');
@@ -5,6 +6,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var GitkitClient = require('gitkitclient');
+var debug = require('debug')('angular-gitkit-demo:server');
 
 var routes = require('./routes/index');
 var oauth2 = require('./routes/oauth2');
@@ -12,6 +15,18 @@ var users = require('./routes/users');
 
 var app = express();
 var plates = expressPlates.init(app);
+
+var gitkitConfig = JSON.parse(fs.readFileSync(path.join(__dirname, 'config', 'gitkit-server-config.json')));
+gitkitConfig.serviceAccountPrivateKeyFile = path.join(__dirname, 'config', gitkitConfig.serviceAccountPrivateKeyFile);
+var pemFile = gitkitConfig.serviceAccountPrivateKeyFile;
+pemFile = pemFile.substr(0, pemFile.length - 4) + '.pem';
+
+if (!fs.existsSync(pemFile)) {
+    throw 'You must run `openssl pkcs12 -in angular-gitkit.p12 -out angular-gitkit.pem -nodes`';
+}
+gitkitConfig.serviceAccountPrivateKeyFile = pemFile;
+app.locals.gitkit = new GitkitClient(gitkitConfig);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
